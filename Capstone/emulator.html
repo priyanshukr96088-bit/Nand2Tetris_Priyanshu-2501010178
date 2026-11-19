@@ -68,6 +68,20 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.5);
       cursor: pointer;
     }
+    canvas.screen-vibrating {
+      animation: screen-vibrate 70ms linear infinite;
+    }
+    @keyframes screen-vibrate {
+      0%, 100% { transform: translate(0, 0); }
+      25% { transform: translate(1px, -1px); }
+      50% { transform: translate(-1px, 1px); }
+      75% { transform: translate(1px, 1px); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      canvas.screen-vibrating {
+        animation: none;
+      }
+    }
     .screen-header {
       width: 100%;
       display: flex;
@@ -204,7 +218,7 @@
   </div>
 
   <div class="instruction-note">
-    💡 <strong>How to test:</strong> Click and hold the green button above, OR simply press and hold any keyboard key on your keyboard! Notice the black rectangular box appear instantly at Row 178 (48 pixels wide, 20 rows tall). When you release the key, the box disappears instantly!
+    💡 <strong>How to test:</strong> Press and hold the green button or any keyboard key to show a thick dotted line halfway across the screen at Row 178. Release the key to clear it.
   </div>
 </div>
 
@@ -229,6 +243,25 @@ const canvas = document.getElementById("screenCanvas");
 const ctx = canvas.getContext("2d");
 const imgData = ctx.createImageData(512, 256);
 const buf32 = new Uint32Array(imgData.data.buffer);
+
+const BOX_ROW = 178;
+const DOTTED_LINE_PATTERN = 0x0F0F;
+
+function clearScreen() {
+  for (let address = 16384; address < 24576; address++) {
+    RAM[address] = 0;
+  }
+}
+
+function drawDottedLine() {
+  clearScreen();
+  for (let row = 0; row < 2; row++) {
+    const lineAddress = 16384 + (BOX_ROW + row) * 32;
+    for (let word = 0; word < 16; word++) {
+      RAM[lineAddress + word] = DOTTED_LINE_PATTERN;
+    }
+  }
+}
 
 function stepCPU() {
   if (pc >= ROM.length) pc = 0;
@@ -314,6 +347,9 @@ function loop() {
     for (let i = 0; i < 4000; i++) {
       stepCPU();
     }
+    if (currentKey !== 0) {
+      drawDottedLine();
+    }
     updateCanvas();
   }
   requestAnimationFrame(loop);
@@ -321,14 +357,19 @@ function loop() {
 
 function holdKey(code) {
   currentKey = code;
+  drawDottedLine();
+  updateCanvas();
 }
 
 function releaseKey() {
   currentKey = 0;
+  clearScreen();
+  updateCanvas();
 }
 
 function toggleRunning() {
   isRunning = !isRunning;
+  canvas.classList.toggle("screen-vibrating", isRunning);
   document.getElementById("runPauseBtn").innerText = isRunning ? "Pause" : "Resume";
 }
 
