@@ -1,6 +1,6 @@
 # Capstone Viva Preparation Guide (5 Minutes Viva)
 **Subject:** Nand to Tetris – I (ETCCNT301)  
-**Student:** Priyanshu Kumar | **Roll No:** 2501010178 | **K = 178**
+**Student:** Priyanshu Kumar | **Roll No:** 2501010178 | **K = 78**
 
 ---
 
@@ -11,20 +11,20 @@
 - In `Box.asm`, find line where start address is defined:
   ```asm
   (DRAW_INIT)
-      @22080      // Starting address for row 178
+      @18880      // Starting address for row 78
       D=A
       @addr
       M=D
   ```
 - **Calculation:** Each row on screen has 32 words.
   - Moving down by 5 rows means adding \(5 \times 32 = 160\) words.
-  - New start address = \(22080 + 160 = \mathbf{22240}\).
-- **Exact modification:** Simply change `@22080` to `@22240`!
+  - New start address = \(18880 + 160 = \mathbf{19040}\).
+- **Exact modification:** Simply change `@18880` to `@19040`!
   Then re-run:
   ```bash
   python assembler.py Box.asm
   ```
-  Load the new `Box.hack` in CPU Emulator and run. The box now appears 5 rows lower (Row 183).
+  Load the new `Box.hack` in CPU Emulator and run. The box now appears 5 rows lower (Row 83).
 
 ---
 

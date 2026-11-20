@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate a visualization of the expected K=178 CPU emulator output."""
+"""Generate a visualization of the expected K=78 CPU emulator output."""
 
 import os
 from PIL import Image, ImageDraw, ImageFont
@@ -12,7 +12,7 @@ def create_cpu_emulator_screenshot(output_path="screenshot_box.png"):
 
     # Title Bar
     draw.rectangle([0, 0, width, 30], fill="#0A246A")
-    draw.text((10, 7), "CPU Emulator - [Box.hack] (Student: Priyanshu Kumar | K = 178)", fill="white")
+    draw.text((10, 7), "CPU Emulator - [Box.hack] (Student: Priyanshu Kumar | K = 78)", fill="white")
 
     # Menu bar
     draw.rectangle([0, 30, width, 55], fill="#F0F0F0", outline="#B0B0B0")
@@ -48,10 +48,10 @@ def create_cpu_emulator_screenshot(output_path="screenshot_box.png"):
         ("RAM[18] (rows_left):", "19"),
         ("RAM[24576] (KBD):", "75 ('K' Key Pressed)"),
         ("------------------", "------------------"),
-        ("Box Row Start:", "K = 178 (SCREEN+5696)"),
+        ("Box Row Start:", "K = 78 (SCREEN+2496)"),
         ("Box Height:", "20 rows"),
         ("Box Width:", "48 pixels (3 words)"),
-        ("Screen Words:", "RAM[22080..22719]"),
+        ("Screen Words:", "RAM[18880..19490] (3 words per row)"),
     ]
 
     y_pos = 145
@@ -76,14 +76,14 @@ def create_cpu_emulator_screenshot(output_path="screenshot_box.png"):
         draw.line([(screen_x, gy), (screen_x + screen_w, gy)], fill="#EAEAEA")
 
     # DRAW THE BLACK BOX!
-    # K = 178
-    # Start row = 178
-    # Height = 20 (row 178 to 197)
+    # K = 78
+    # Start row = 78
+    # Height = 20 (row 78 to 97)
     # Width = 48 pixels (x = 0 to 47 from left edge)
     box_x0 = screen_x + 0
-    box_y0 = screen_y + 178
+    box_y0 = screen_y + 78
     box_x1 = screen_x + 47
-    box_y1 = screen_y + 178 + 19
+    box_y1 = screen_y + 78 + 19
 
     # Draw solid black box
     draw.rectangle([box_x0, box_y0, box_x1, box_y1], fill="#000000")
@@ -99,13 +99,13 @@ def create_cpu_emulator_screenshot(output_path="screenshot_box.png"):
 
     # Row pointer
     draw.line([(screen_x - 15, box_y0), (box_x0 - 2, box_y0)], fill="#388E3C", width=2)
-    draw.text((screen_x - 65, box_y0 - 6), "Row 178", fill="#388E3C")
+    draw.text((screen_x - 65, box_y0 - 6), "Row 78", fill="#388E3C")
 
     # Legend / Info box under screen
     draw.rectangle([screen_x, screen_y + screen_h + 80, screen_x + screen_w, screen_y + screen_h + 175], fill="#FFFFFF", outline="#B0B0B0")
     draw.text((screen_x + 10, screen_y + screen_h + 88), "Box Verification Status:", fill="#0A246A")
     draw.text((screen_x + 10, screen_y + screen_h + 108), "• Condition: Key 'K' (ASCII 75) pressed -> KBD != 0", fill="#2E7D32")
-    draw.text((screen_x + 10, screen_y + screen_h + 126), "• Target: Rows [178..197], Columns [0..2] filled with -1 (0xFFFF)", fill="#333333")
+    draw.text((screen_x + 10, screen_y + screen_h + 126), "• Target: Rows [78..97], Columns [0..2] filled with -1 (0xFFFF)", fill="#333333")
     draw.text((screen_x + 10, screen_y + screen_h + 144), "• Behavior: When key released, KBD == 0, screen clears to white (0x0000)", fill="#333333")
 
     # Status Bar at bottom

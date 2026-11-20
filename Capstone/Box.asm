@@ -5,15 +5,15 @@
 //
 // Student Name: Priyanshu Kumar
 // Roll Number:  2501010178
-// Personal Number K: 178 (last three digits of roll number)
+// Personal Number K: 78 (last two digits of roll number)
 //
-        // Box Specifications for K = 178:
-// - Start Row: K = 178
-// - Height: 20 rows (Row 178 to Row 197)
-// - Width: 16 * ((178 mod 4) + 1) = 16 * (2 + 1) = 48 pixels
+        // Box Specifications for K = 78:
+// - Start Row: K = 78
+// - Height: 20 rows (Row 78 to Row 97)
+// - Width: 16 * ((78 mod 4) + 1) = 16 * (2 + 1) = 48 pixels
 //   (which equals 3 words of 16 bits each per row, starting from left edge)
 // - Start Address in Screen Memory:
-//     SCREEN + 32 * K = 16384 + (32 * 178) = 16384 + 5696 = 22080
+//     SCREEN + 32 * K = 16384 + (32 * 78) = 16384 + 2496 = 18880
 //
 // Operation:
 // - Continuously checks keyboard input (RAM[24576] / KBD).
@@ -41,8 +41,8 @@
     M=-1
 
 (DRAW_INIT)
-    // Initialize addr pointer to start of box: SCREEN + 32 * 178 = 22080
-    @22080
+    // Initialize addr pointer to start of box: SCREEN + 32 * 78 = 18880
+    @18880
     D=A
     @addr
     M=D

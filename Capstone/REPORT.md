@@ -8,16 +8,16 @@
 ### Student Details
 - **Student Name:** Priyanshu Kumar
 - **Roll Number:** 2501010178
-- **Personal Number \(K\):** `178` *(last three digits of the roll number)*
-- **Calculations based on \(K = 178\):**
-  - **\(K \pmod 3\):** \(178 \pmod 3 = 1\)
-  - **\(K \pmod 4\):** \(178 \pmod 4 = 2\)
+- **Personal Number \(K\):** `78` *(last two digits of the roll number)*
+- **Calculations based on \(K = 78\):**
+  - **\(K \pmod 3\):** \(78 \pmod 3 = 0\)
+  - **\(K \pmod 4\):** \(78 \pmod 4 = 2\)
   - **Box Position & Size:**
-    - **Starting Row:** Row \(K = 178\)
-    - **Height:** 20 rows (Rows 178 to 197 inclusive)
+    - **Starting Row:** Row \(K = 78\)
+    - **Height:** 20 rows (Rows 78 to 97 inclusive)
     - **Width:** \(16 \times ((K \pmod 4) + 1) = 16 \times (2 + 1) = 48\) pixels from the left edge.
     - **Screen Memory Words:** Hack display has 16 pixels per word. 48 pixels = 3 consecutive words (Word 0, Word 1, Word 2) at the start of each row.
-    - **Base Address:** \(\text{SCREEN} + (32 \times 178) = 16384 + 5696 = \mathbf{22080}\).
+    - **Base Address:** \(\text{SCREEN} + (32 \times 78) = 16384 + 2496 = \mathbf{18880}\).
 
 ---
 
@@ -25,7 +25,7 @@
 The objective of this capstone project is to demonstrate mastery of the bottom-up computer system stack developed in Nand to Tetris (Part I):
 1. **Part A (Hardware Layer):** Completing the 16-bit Von Neumann architecture by assembling `CPU.hdl`, `Memory.hdl`, and `Computer.hdl`.
 2. **Part B (Software Translation Layer):** Developing an assembler in Python (`assembler.py`) that translates Hack assembly (`.asm`) into binary machine language (`.hack`), featuring symbol-table resolution and a duplicate-label warning as an additional assembler feature.
-3. **Part C (Application / Firmware Layer):** Writing an interactive graphics driver program (`Box.asm`) that responds in real-time to keyboard input, rendering a \(48 \times 20\) pixel black rectangle at Row 178 when a key is pressed, and clearing it when released.
+3. **Part C (Application / Firmware Layer):** Writing an interactive graphics driver program (`Box.asm`) that responds in real-time to keyboard input, rendering a \(48 \times 20\) pixel black rectangle at Row 78 when a key is pressed, and clearing it when released.
 
 ---
 
@@ -93,10 +93,10 @@ The Hack screen consists of a \(512 \times 256\) monochrome pixel display mapped
   \[
   \text{RowStart}(r) = \text{SCREEN} + 32 \times r = 16384 + 32r
   \]
-- For Roll Number 2501010178 (\(K = 178\)):
-  - **Start Row:** 178 \(\implies \text{Address} = 16384 + (32 \times 178) = 22080\).
-  - **Height:** 20 rows (Rows 178 to 197).
-  - **Width:** \(16 \times ((178 \pmod 4) + 1) = 48\) pixels \(= 3\) consecutive words from the left edge (columns 0, 1, 2).
+- For Roll Number 2501010178 (\(K = 78\), its last two digits):
+  - **Start Row:** 78 \(\implies \text{Address} = 16384 + (32 \times 78) = 18880\).
+  - **Height:** 20 rows (Rows 78 to 97).
+  - **Width:** \(16 \times ((78 \pmod 4) + 1) = 48\) pixels \(= 3\) consecutive words from the left edge (columns 0, 1, 2).
   - Each word written is `-1` (`0xFFFF`, all 16 pixels black) when a key is pressed, or `0` (`0x0000`, white) when released.
 
 ### 4.2 Control Flow & Memory Access
@@ -120,7 +120,7 @@ The Hack screen consists of a \(512 \times 256\) monochrome pixel display mapped
                              v
                +---------------------------+
                |         DRAW_INIT         |
-               | addr = 22080 (Row 178)    |
+               | addr = 18880 (Row 78)     |
                | rows_left = 20            |
                +-------------+-------------+
                              |
@@ -157,4 +157,4 @@ The custom assembler also accepts commutative operand aliases, while the assembl
 ---
 
 ## 6. Conclusion
-The CPU, Memory, and Computer integration tests, assembler output, browser emulator, and Box drawing/clearing checks pass for \(K = 178\).
+The CPU, Memory, and Computer integration tests, assembler output, browser emulator, and Box drawing/clearing checks pass for \(K = 78\).

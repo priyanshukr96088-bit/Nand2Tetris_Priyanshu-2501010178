@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Test runner and terminal visualizer for the K=178 Box.hack program."""
+"""Test runner and terminal visualizer for the K=78 Box.hack program."""
 
 import os
 import sys
 
 STUDENT_NAME = "Priyanshu Kumar"
 ROLL_NUMBER = "2501010178"
-K = 178
+K = int(ROLL_NUMBER[-2:])
 BOX_HEIGHT = 20
 BOX_WORDS = (K % 4) + 1
 SCREEN_BASE = 16384

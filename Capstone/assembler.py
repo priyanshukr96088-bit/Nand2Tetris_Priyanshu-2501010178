@@ -6,7 +6,7 @@ School of Engineering & Technology, K.R. Mangalam University
 
 Student: Priyanshu Kumar
 Roll Number: 2501010178
-Personal Number: K = 178 (178 mod 3 = 1)
+Personal Number: K = 78 (78 mod 3 = 0)
 Additional feature: Print a warning if the same label is written twice.
 (Also supports symbols.txt export and clear line number syntax error reporting).
 """
@@ -100,8 +100,8 @@ def clean_line(line):
 
 
 class Assembler:
-    def __init__(self, k=178):
-        self.k = k
+    def __init__(self, k=78):
+        self.k = k % 100
         self.symbol_table = get_predefined_symbols()
         self.next_var_addr = 16
         self.label_first_seen_line = {}  # Used to warn about duplicate label definitions.
@@ -258,7 +258,7 @@ def main():
 
     asm_file = sys.argv[1]
     hack_file = None
-    k = 178  # Default K for roll number ending in 178 (Roll No: 2501010178)
+    k = 78  # Last two digits of roll number 2501010178
 
     args = sys.argv[2:]
     idx = 0
